@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import aCard from "../../images/2C.png";
 
 
-function Card({value}) {
+function Card({children}) {
   const [flipped, setFlipped] = useState(true);
 
   const handelClick = () => {
@@ -12,7 +12,7 @@ function Card({value}) {
     <article className={`card ${flipped ? "flip" : ""}`} onClick={handelClick}>
       <img
         className="card__front"
-        src={require(`../../images/${value?value:"AD"}.png`).default}
+        src={require(`../../images/${children?children:"AD"}.png`).default}
       ></img>
     </article>
   );

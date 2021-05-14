@@ -16,13 +16,10 @@ allCards = allCards.join("").split(" ");
 function App() {
   const value = "10C";
   const [finalCards, setFinalCards] = useState([]);
-  const [randomCards, setRandomCards] = useState([]);
+
   const [card1, setCard1] = useState();
   const [card2, setCard2] = useState();
   const [card3, setCard3] = useState();
-  const [card4, setCard4] = useState();
-  const [card5, setCard5] = useState();
-  const [card6, setCard6] = useState();
   //get three random numbers from all cards
   const randomeNumber = () => {
     return Math.floor(Math.random() * 52);
@@ -32,6 +29,10 @@ function App() {
     arr.sort(()=>Math.random()-0.5);
     setFinalCards(arr);
     return arr;
+  }
+
+  function getCards(one,two,three){
+    return [<Card key={0}>{one}</Card>,<Card key={1}>{two}</Card>,<Card key={2}>{three}</Card>]
   }
 
   useEffect(() => {
@@ -57,7 +58,7 @@ function App() {
     setCard2(allCards[values[1]]);
     setCard3(allCards[values[2]]);
 
-    let cards = [<Card key={0}value={card1} />,<Card key={1}value={card2} />,<Card key={2}value={card3} />];
+    let cards = [<Card key={0}></Card>,<Card key={1} />,<Card key={2}/>];
     shuffle(cards);
     
   }, []);
@@ -65,9 +66,7 @@ function App() {
     <div className="App">
       <Layout>
         <section className="row">
-          <Card value={card1} />
-          <Card value={card2} />
-          <Card value={card3} />
+          {getCards(card1,card2,card3)}
         </section>
         <section className="row">
           <Card value={card1} />
