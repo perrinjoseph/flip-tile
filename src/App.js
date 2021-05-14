@@ -1,23 +1,74 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import Card from "./Components/Card/Card";
+import Layout from "./Components/Layout/Layout";
+
+const cardNum = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "K", "Q"];
+const suites = ["H", "C", "D", "S"];
+let allCards = cardNum.map((el, index, arr) => {
+  let card = "";
+  suites.forEach((val) => {
+    card += `${el}${val}${val === "S" && index === 12 ? "" : " "}`;
+  });
+  return card;
+});
+allCards = allCards.join("").split(" ");
 
 function App() {
+  const value = "10C";
+  const [finalCards, setFinalCards] = useState([]);
+  const [randomCards, setRandomCards] = useState([]);
+  const [card1, setCard1] = useState("3C");
+  const [card2, setCard2] = useState("3C");
+  const [card3, setCard3] = useState("3C");
+  const [card4, setCard4] = useState("3C");
+  const [card5, setCard5] = useState("3C");
+  const [card6, setCard6] = useState("3C");
+  //get three random numbers from all cards
+  const randomeNumber = () => {
+    return Math.floor(Math.random() * 52);
+  };
+
+  useEffect(() => {
+    let num = [];
+    for (let x = 0; x < 3; x++) {
+      num.push(randomeNumber());
+    }
+    console.log(num);
+
+    let values = [];
+    let completed = false;
+    let val = "";
+
+    while (completed === false) {
+      val = num[Math.floor(Math.random() * 3)];
+      if (!values.includes(val) && values.length < 3) {
+        values.push(val);
+      }
+      if (values.length >= 3) {
+        completed = true;
+      }
+      console.log(values);
+    }
+    setCard1(allCards[values[0]]);
+    setCard2(allCards[values[1]]);
+    setCard3(allCards[values[2]]);
+
+    let cards = [];
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Layout>
+        <section className="row">
+          <Card value={card1} />
+          <Card value={card2} />
+          <Card value={card3} />
+        </section>
+        <section className="row">
+          <Card value={card1} />
+          <Card value={card2} />
+          <Card value={card3} />
+        </section>
+      </Layout>
     </div>
   );
 }

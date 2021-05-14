@@ -1,0 +1,29 @@
+//variables
+@import "./variables";
+
+//Css reset
+@import "./reset";
+
+@import "../Components/Layout/layout";
+@import "../Components/Card/card";
+
+body {
+  background-color: $bg-color;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.row {
+
+  display: flex;
+  justify-content: space-evenly;
+}
