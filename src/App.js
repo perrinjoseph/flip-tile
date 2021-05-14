@@ -17,23 +17,28 @@ function App() {
   const value = "10C";
   const [finalCards, setFinalCards] = useState([]);
   const [randomCards, setRandomCards] = useState([]);
-  const [card1, setCard1] = useState("3C");
-  const [card2, setCard2] = useState("3C");
-  const [card3, setCard3] = useState("3C");
-  const [card4, setCard4] = useState("3C");
-  const [card5, setCard5] = useState("3C");
-  const [card6, setCard6] = useState("3C");
+  const [card1, setCard1] = useState();
+  const [card2, setCard2] = useState();
+  const [card3, setCard3] = useState();
+  const [card4, setCard4] = useState();
+  const [card5, setCard5] = useState();
+  const [card6, setCard6] = useState();
   //get three random numbers from all cards
   const randomeNumber = () => {
     return Math.floor(Math.random() * 52);
   };
+
+  const shuffle = (arr)=>{
+    arr.sort(()=>Math.random()-0.5);
+    setFinalCards(arr);
+    return arr;
+  }
 
   useEffect(() => {
     let num = [];
     for (let x = 0; x < 3; x++) {
       num.push(randomeNumber());
     }
-    console.log(num);
 
     let values = [];
     let completed = false;
@@ -47,13 +52,14 @@ function App() {
       if (values.length >= 3) {
         completed = true;
       }
-      console.log(values);
     }
     setCard1(allCards[values[0]]);
     setCard2(allCards[values[1]]);
     setCard3(allCards[values[2]]);
 
-    let cards = [];
+    let cards = [<Card key={0}value={card1} />,<Card key={1}value={card2} />,<Card key={2}value={card3} />];
+    shuffle(cards);
+    
   }, []);
   return (
     <div className="App">

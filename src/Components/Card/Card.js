@@ -12,7 +12,7 @@ function Card({value}) {
     <article className={`card ${flipped ? "flip" : ""}`} onClick={handelClick}>
       <img
         className="card__front"
-        src={require(`../../images/${value}.png`).default}
+        src={require(`../../images/${value?value:"AD"}.png`).default}
       ></img>
     </article>
   );
