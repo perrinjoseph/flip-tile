@@ -16,7 +16,6 @@ allCards = allCards.join("").split(" ");
 function App() {
   const value = "10C";
   const [finalCards, setFinalCards] = useState([]);
-
   const [card1, setCard1] = useState();
   const [card2, setCard2] = useState();
   const [card3, setCard3] = useState();
@@ -26,9 +25,11 @@ function App() {
   };
 
   const shuffle = (arr)=>{
-    arr.sort(()=>Math.random()-0.5);
-    setFinalCards(arr);
-    return arr;
+    console.log(arr)
+    const copyArr = [...arr]
+    copyArr.sort(()=>Math.random()-0.5);
+    return copyArr;
+
   }
 
   function getCards(one,two,three){
@@ -57,10 +58,8 @@ function App() {
     setCard1(allCards[values[0]]);
     setCard2(allCards[values[1]]);
     setCard3(allCards[values[2]]);
+    setFinalCards([<Card key={0}>{allCards[values[0]]}</Card>,<Card key={1}>{allCards[values[1]]}</Card>,<Card key={2}>{allCards[values[2]]}</Card>]);
 
-    let cards = [<Card key={0}></Card>,<Card key={1} />,<Card key={2}/>];
-    shuffle(cards);
-    
   }, []);
   return (
     <div className="App">
@@ -69,9 +68,7 @@ function App() {
           {getCards(card1,card2,card3)}
         </section>
         <section className="row">
-          <Card value={card1} />
-          <Card value={card2} />
-          <Card value={card3} />
+          {shuffle(finalCards)}
         </section>
       </Layout>
     </div>
